@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container-fluid">
+    <h4 class="m-4">Add Student</h4>
+    {% if success %}
+    <div>
+        The new student added successfully.
+        <a href="{% url 'index' %}" class="alert-link">Go to Homepage.</a>
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-6">
+            <div class="card border-secondary ms-4 me-4 mb-4">
+                <div class="card-header">Student Registration</div>
+                <div class="card-body">
+                    <form action="{% url 'add' %}" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <a href="{% url 'index' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
